@@ -1,5 +1,4 @@
-from ctypes.wintypes import PWIN32_FIND_DATAW
-from flask import Blueprint
+from flask import Blueprint, render_template
 from pybo import db
 from pybo.models import Person, Car
 
@@ -35,5 +34,53 @@ def print_person(no) :
 @bp.route('/print_car/<int:no>')
 def print_car(no) :
     c1 = db.session.query(Car).filter(Car.no == no).first()
-    
+
     return "{} {}만원짜리 {}".format(c1.color, c1.price, c1.model)
+
+
+@bp.route('/gugu')
+def gugu() :
+    return render_template('gugu.html')
+
+@bp.route('/discount/<int:age>')
+def discount(age) :
+    
+    return render_template('discount.html', age=age)
+
+@bp.route('test')
+def test() :
+    c1 = db.session.query(Car).filter(Car.model == "아반떼").first()
+    car_list = db.session.query(Car).all()
+    
+    return render_template('test.html', car_list=car_list)
+
+
+@bp.route('/print_car_list')
+def print_car_list() :
+
+    c1 = db.session.query(Car).filter(Car.model == "아반떼").first()
+        
+    return """ 
+        <table>
+            <tr class="red">
+                <td>Model</td>
+                <td>Price</td>
+                <td>Color</td>
+            </tr>
+            <tr>
+                <td>{}</td>
+                <td>{}</td>
+                <td>{}</td>
+            </tr>
+            <tr>
+                <td>싼타페</td>
+                <td>3000</td>
+                <td>파란색</td>
+            </tr>
+            <tr>
+                <td>모닝</td>
+                <td>1000</td>
+                <td>하얀색</td>
+            </tr>
+        </table>
+    """.format(c1.model, c1.price, c1.color)

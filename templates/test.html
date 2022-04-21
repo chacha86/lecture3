@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <!-- pybo CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Hello, pybo!</title>
+</head>
+<body>
+<div class="container">
+    <table class="table table-light">
+        <tr class="table-dark">
+            <td>Model!!</td>
+            <td>Price!!</td>
+            <td>Color!!</td>
+        </tr>
+        
+        <!-- 반복 시작-->
+        {% for car in car_list : %}
+        <tr>
+            <td>{{ car.model }}</td>
+            <td>{{ car.price }}</td>
+            <td>{{ car.color }}</td>
+        </tr>
+        {% endfor %}
+        <!-- 반복 끝-->
+    </table>
+</div>
+</body>
+</html>
+
+
+
+

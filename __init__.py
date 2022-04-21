@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import config
@@ -19,7 +19,7 @@ def create_app() :
     from . import models
     from .views import test_view
     app.register_blueprint(test_view.bp)
-   
+    
     # /는 서버 주소를 의미 -> 127.0.0.1:5000/
     @app.route('/')
     def test_view() :
